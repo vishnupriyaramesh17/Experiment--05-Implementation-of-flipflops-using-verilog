@@ -1,8 +1,8 @@
 # Experiment--05-Implementation-of-flipflops-using-verilog
-### AIM: To implement all the flipflops using verilog and validating their functionality using their functional tables
-### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
-### SOFTWARE REQUIRED:   Quartus prime
-### THEORY 
+# AIM: To implement all the flipflops using verilog and validating their functionality using their functional tables
+# HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
+# SOFTWARE REQUIRED:   Quartus prime
+# THEORY 
 SR Flip-Flop
 SR flip-flop operates with only positive clock transitions or negative clock transitions. Whereas, SR latch operates with enable signal. The circuit diagram of SR flip-flop is shown in the following figure.
 
@@ -31,7 +31,7 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 Q(t+1)=S+R′Q(t)Q(t+1)=S+R′Q(t)
 
 
-### D Flip-Flop
+# D Flip-Flop
 D flip-flop operates with only positive clock transitions or negative clock transitions. Whereas, D latch operates with enable signal. That means, the output of D flip-flop is insensitive to the changes in the input, D except for active transition of the clock signal. The circuit diagram of D flip-flop is shown in the following figure.
  
 This circuit has single input D and two outputs Qtt & Qtt’. The operation of D flip-flop is similar to D Latch. But, this flip-flop affects the outputs only when positive transition of the clock signal is applied instead of active enable.
@@ -52,7 +52,7 @@ Qt+1t+1 = D
 Next state of D flip-flop is always equal to data input, D for every positive transition of the clock signal. Hence, D flip-flops can be used in registers, shift registers and some of the counters.
 
 
-### JK Flip-Flop
+# JK Flip-Flop
 JK flip-flop is the modified version of SR flip-flop. It operates with only positive clock transitions or negative clock transitions. The circuit diagram of JK flip-flop is shown in the following figure.
 ![image](https://user-images.githubusercontent.com/36288975/167910378-d2d984a7-2815-4d17-8c41-ee4bdf59ec24.png) 
 
@@ -79,7 +79,7 @@ Q(t+1)=JQ(t)′+K′Q(t)Q(t+1)=JQ(t)′+K′Q(t)
 
 
 
-### T Flip-Flop
+# T Flip-Flop
 T flip-flop is the simplified version of JK flip-flop. It is obtained by connecting the same input ‘T’ to both inputs of JK flip-flop. It operates with only positive clock transitions or negative clock transitions. The circuit diagram of T flip-flop is shown in the following figure.
 
 ![image](https://user-images.githubusercontent.com/36288975/167911534-5f3c445d-bc68-46e2-9a9c-7efce5febc60.png)
@@ -101,40 +101,109 @@ From the above characteristic table, we can directly write the next state equati
 Q(t+1)=T′Q(t)+TQ(t)′
 ⇒Q(t+1)=T⊕Q(t)
 
-### Procedure
-/* write all the steps invloved */
+# Procedure
+## Step:1
+
+Open Quartus II and select new project and choose the file location.
+## Step:2
+
+Module Declaration. Module should have the file name.
+## Step:3
+
+Declare Inputs and outputs.
+## Step:4
+
+Use assign declaration and wire to define the functionality of logic circuits.
+## Step:5
+
+End the program with endmodule.
+## Step:6
+
+Run the program and choose RTL viewer to get RTL realization.
 
 
 
-### PROGRAM 
-/*
+# PROGRAM 
+
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
-*/
+
+     Developed by: Vishnupriya R
+     RegisterNumber:  212222110054
+## SR Flipflop
+
+      module SR(S,R,clk,Q,Qbar);
+      input S,R,clk;
+      output Q,Qbar;
+      wire X,Y;
+      nand (X,S,clk);
+      nand (Y,R,clk);
+      nand (Q,X,Qbar);
+      nand (Qbar,Y,Q);
+      endmodule
+
+## JK flipflop
+
+     module JK(J,K,clk,Q,Qbar);
+     input J,K,clk;
+     output Q,Qbar;
+     wire X,Y;
+     nand (X,J,clk,Qbar);
+     nand (Y,K,clk,Q);
+     nand (Q,X,Qbar);
+     nand (Qbar,Y,Q);
+     endmodule
+
+## T Flipflop
+
+      module TF(T,clk,Q,Qbar);
+      input T,clk;
+      output Q,Qbar;
+      wire S,R;
+      nand (S,T,clk,Qbar);
+      nand (R,T,clk,Q);
+      nand (Q,S,Qbar);
+      nand (Qbar,R,Q);
+      endmodule
+
+## D Flipflop
+
+      module DF(D,clk,Q,Qbar);
+      input D,clk;
+      output Q,Qbar;
+      assign Dbar=~D;
+      wire X,Y;
+      nand (X,D,clk);
+      nand (Y,Dbar,clk);
+      nand (Q,X,Qbar);
+      nand (Qbar,Y,Q);
+      endmodule
 
 
+# RTL LOGIC FOR FLIPFLOPS 
+
+## SR Flipflop
+![Screenshot (215)](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/44c8476d-9ca5-4909-8d8f-20f887de1783)
+
+## JK flipflop
+![Screenshot (221)](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/cc99e825-672f-4cff-8fa5-78831dd28ea6)
+## T Flipflop
+![Screenshot (218)](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/ee7b3ff8-a170-458f-a218-6e0ee4ef81e6)
+
+## D Flipflop
+![Screenshot (225)](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/4e5f96bb-97cc-4bf9-b01c-f709d9e924e7)
 
 
+# TIMING DIGRAMS FOR FLIP FLOPS 
+## SR Flipflop
+![Screenshot (216)](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/a05d97c2-35c8-4ba4-81ec-c46e1cd7b01b)
+## JK flipflop
+![Screenshot (222)](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/22ebc26e-b628-4e52-960f-cd12c201d0b1)
+## T Flipflop
+![t ff](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/6b9ac5d8-98a3-448c-8865-26dce629fcbb)
 
-
-### RTL LOGIC FOR FLIPFLOPS 
-
-
-
-
-
-
-
-
-
-### TIMING DIGRAMS FOR FLIP FLOPS 
-
-
-
-
-
-
+## D Flipflop
+![Screenshot (226)](https://github.com/vishnupriyaramesh17/Experiment--05-Implementation-of-flipflops-using-verilog/assets/119393589/431a07b1-c18d-4ff3-81d7-8afcfc59a2b8)
 
 
 ### RESULTS 
+Thus, the program for flipflops is implemented and its functional table is successfully verified in quartus using Verilog programming.
